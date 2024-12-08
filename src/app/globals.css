@@ -19,7 +19,18 @@ body {
   margin: auto;
   height: 100vh;
 }
+button{
+  background-color:white;
+  color:rgb(0,123,216);
+  padding:13px 25px;
+  border:1px solid rgb(0,123,216);
+  font-size: 16px;
+  border-radius: 25px;
+  margin-top: 10px;
+}
+button:hover,button:active{
 
+}
 body {
   color: var(--foreground);
   background: var(--background);

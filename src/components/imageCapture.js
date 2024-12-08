@@ -61,8 +61,8 @@ export default function ImageCapture({ setImage }) {
         <video className="videoCanvas" ref={videoRef} autoPlay playsInline />
       </div>
       <canvas ref={canvasRef} style={{ display: "none" }} /> {/* Hidden canvas */}
-      <div>
-        <button className="buttonClick" onClick={handleClick}>Click</button>
+      <div className="buttonContainer">
+        <button className="buttonClick" onClick={handleClick} style={{marginRight:'10px'}}>Capture</button>
         <button className="buttonClick" onClick={handleSwap}>Swap</button>
       </div>
     </div>

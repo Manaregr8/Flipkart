@@ -8,6 +8,7 @@ export default function Home() {
   return (
     <div className="containerNew" >
       <Container/>
+      <p style={{marginTop:'20px', textAlign:'center'}}>This Project is Under Development. Dont forget to show some love!</p>
     </div>
   );
 }
