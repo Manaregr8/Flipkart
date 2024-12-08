@@ -7,3 +7,13 @@
     justify-content: center;
     align-items: center;
   }
+  @media(max-width:1330px){
+    .containerNew{
+      padding: 20px;
+    }
+  }
+  @media(max-width:492px){
+    .containerNew{
+      padding: 10px;
+    }
+  }

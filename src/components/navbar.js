@@ -5,7 +5,7 @@ export default function Home() {
   return (
    <nav>
     <img className="logoNavbar" src="./logoFlip.png" />
-    <button className="buttonNavbar">Github</button>
+    <a href="https://github.com/Manaregr8/Flipkart" className="buttonNavbar">Github Repo</a>
    </nav>
   );
 }
