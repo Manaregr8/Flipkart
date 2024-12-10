@@ -1,7 +1,8 @@
-import "@/styles/imageCaptureStyles.css"
+import "@/styles/imageCaptureStyles.css";
 import React, { useState, useRef, useEffect } from "react";
+import { predictImage } from "../utils/api"; // Assuming you have this utility for making the API request
 
-export default function ImageCapture({ setImage }) {
+export default function ImageCapture({ setImage, setPrediction }) {
   const [cameraFacing, setCameraFacing] = useState("user"); // 'user' for front, 'environment' for back
   const [stream, setStream] = useState(null); // Stream state to manage the camera
   const videoRef = useRef(null);
@@ -30,8 +31,8 @@ export default function ImageCapture({ setImage }) {
     };
   }, [cameraFacing]);
 
-  // Capture the image
-  const handleClick = () => {
+  // Capture the image and send to API
+  const handleClick = async () => {
     const canvas = canvasRef.current;
     const video = videoRef.current;
 
@@ -45,8 +46,19 @@ export default function ImageCapture({ setImage }) {
     // Extract image as a Data URL
     const dataUrl = canvas.toDataURL("image/png");
 
-    // Send the captured image to the parent component
+    // Send the captured image to the parent component and API
     setImage(dataUrl);
+
+    // Convert Data URL to Blob and send to backend
+    const blob = await fetch(dataUrl).then((res) => res.blob());
+
+    try {
+      const result = await predictImage(blob); // Send blob to backend for prediction
+      setPrediction(result.predicted_class); // Assuming the backend returns predicted class
+    } catch (error) {
+      console.error("Error during prediction:", error);
+      setPrediction(null);
+    }
   };
 
   // Swap the camera
@@ -62,8 +74,12 @@ export default function ImageCapture({ setImage }) {
       </div>
       <canvas ref={canvasRef} style={{ display: "none" }} /> {/* Hidden canvas */}
       <div className="buttonContainer">
-        <button className="buttonClick" onClick={handleClick} style={{marginRight:'10px'}}>Capture</button>
-        <button className="buttonClick" onClick={handleSwap}>Swap</button>
+        <button className="buttonClick" onClick={handleClick} style={{ marginRight: '10px' }}>
+          Capture
+        </button>
+        <button className="buttonClick" onClick={handleSwap}>
+          Swap
+        </button>
       </div>
     </div>
   );
