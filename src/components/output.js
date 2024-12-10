@@ -1,24 +1,29 @@
-/*{image ? <img src={image} alt="Captured Output" /> : <p>No image captured yet</p>}*/
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/outputStyles.css";
 
 export default function Output({ image, modelResponse, databaseResponse }) {
   const [imageStatus, setImageStatus] = useState("waiting");
   const [modelStatus, setModelStatus] = useState("waiting");
   const [databaseStatus, setDatabaseStatus] = useState("waiting");
+  const [isClient, setIsClient] = useState(false); // Track if we're on the client side
 
   // Simulate updates to statuses
-  React.useEffect(() => {
+  useEffect(() => {
     if (image) setImageStatus("captured");
   }, [image]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (modelResponse) setModelStatus("received");
   }, [modelResponse]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (databaseResponse) setDatabaseStatus("sent");
   }, [databaseResponse]);
+
+  // Set isClient to true after the component mounts (client-side only)
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const renderStatus = (status, waitingText, successText) => {
     let circleClass = "circle ";
@@ -34,6 +39,13 @@ export default function Output({ image, modelResponse, databaseResponse }) {
         </p>
       </div>
     );
+  };
+
+  // Client-side check for window.open()
+  const handleCheckDatabaseClick = () => {
+    if (isClient && typeof window !== "undefined") {
+      window.open("/database", "_blank");
+    }
   };
 
   return (
@@ -60,7 +72,7 @@ export default function Output({ image, modelResponse, databaseResponse }) {
       databaseStatus === "sent" ? (
         <button
           className="checkDatabaseButton"
-          onClick={() => window.open("/database", "_blank")}
+          onClick={handleCheckDatabaseClick}
         >
           Check Database
         </button>
