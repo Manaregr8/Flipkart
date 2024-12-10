@@ -1,0 +1,56 @@
+.outputContainer{
+height: 300px;
+}
+.statusList{
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .circle-yellow {
+    background-color: yellow;
+    animation: blink 1s infinite;
+  }
+  
+  .circle-green {
+    background-color: green;
+  }
+  
+  @keyframes blink {
+    50% {
+      background-color: #2273BA;
+    }
+  }
+  
+  .outputContainer {
+    text-align: center;
+  }
+  
+  .listOutput {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkDatabaseButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .checkDatabaseButton:hover {
+    background-color: #0056b3;
+  }
+  
