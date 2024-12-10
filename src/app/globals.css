@@ -17,7 +17,6 @@ body {
   overflow-x: hidden;
   max-width: 1300px;
   margin: auto;
-  height: 100vh;
 }
 a,button{
   text-decoration: none;
