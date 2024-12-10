@@ -1,6 +1,4 @@
 import Image from "next/image";
-import styles from "../page.module.css";
-import "@/styles/home.css";
 import Database from "@/components/databaseComponent";
 export default function DatabaseMain() {
 
