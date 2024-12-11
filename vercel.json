@@ -1,20 +1,26 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "pages/**/*",
-        "use": "@vercel/next"
-      },
-      {
-        "src": "api/**/*",
-        "use": "@vercel/python"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/api/predict",
-        "dest": "/api/predict.py"
-      }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "pages/**/*",
+      "use": "@vercel/next"
+    },
+    {
+      "src": "api/predict.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "functions": {
+    "api/predict.py": {
+      "runtime": "python3.9",
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/predict",
+      "dest": "/api/predict.py"
+    }
+  ]
+}
